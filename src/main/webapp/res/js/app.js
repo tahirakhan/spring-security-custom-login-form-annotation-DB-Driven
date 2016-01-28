@@ -1,5 +1,9 @@
 /**
  * Created by Tahir Ali Khan on 1/26/2016.
  */
-var app = angular.module('myApp', []);
+var App = angular.module('myApp', [])
+    .config(function($httpProvider) {
 
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
+    });

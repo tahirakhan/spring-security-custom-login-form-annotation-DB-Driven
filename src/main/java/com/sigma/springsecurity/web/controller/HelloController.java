@@ -34,13 +34,25 @@ public class HelloController {
     return model;
 
   }
-  @RequestMapping(value = "/users**", method = RequestMethod.GET)
+  @RequestMapping(value = "/users", method = RequestMethod.GET)
   public ModelAndView usersPage() {
 
     ModelAndView model = new ModelAndView();
     model.addObject("title", "Spring Security Login Form - Database Authentication");
     model.addObject("message", "This page is for ROLE_ADMIN only!");
     model.setViewName("users");
+
+    return model;
+
+  }
+
+  @RequestMapping(value = "/user", method = RequestMethod.GET)
+  public ModelAndView userPage() {
+
+    ModelAndView model = new ModelAndView();
+    model.addObject("title", "Spring Security Login Form - Database Authentication");
+    model.addObject("message", "This page is for ROLE_ADMIN only!");
+    model.setViewName("user");
 
     return model;
 

@@ -39,5 +39,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/res/**").addResourceLocations("/res/");
+    registry.addResourceHandler("/bower_components/**").addResourceLocations("/bower_components/");
   }
 }
