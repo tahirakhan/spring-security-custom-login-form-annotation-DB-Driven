@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <html>
 <head>
     <title>AngularJS $http Example</title>
@@ -30,6 +31,8 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 <div class="generic-container" ng-controller="UserController as ctrl">
+
+    <security:authorize ifAnyGranted="ROLE_ADMIN">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">User Registration Form </span></div>
         <div class="formcontainer">
@@ -82,6 +85,10 @@
             </form>
         </div>
     </div>
+</security:authorize>
+
+
+
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><span class="lead">List of Users </span></div>
@@ -103,7 +110,10 @@
                     <td><span ng-bind="u.address"></span></td>
                     <td><span ng-bind="u.email"></span></td>
                     <td>
-                        <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                        <security:authorize ifAnyGranted="ROLE_ADMIN">
+                            <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>
+                            <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                        </security:authorize>
                     </td>
                 </tr>
                 </tbody>
