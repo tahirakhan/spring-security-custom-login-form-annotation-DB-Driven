@@ -26,8 +26,10 @@
         }
 
     </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="<c:url value='/res/css/app.css' />" rel="stylesheet"></link>
+
+    <link href="<c:url value='/res/js/bootstrap/bootstrap.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/res/js/toaster/toastr.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/res/css/app.css' />" rel="stylesheet">
 </head>
 <body ng-app="myApp" class="ng-cloak">
 <div class="generic-container" ng-controller="UserController as ctrl">
@@ -47,6 +49,32 @@
                                 <span ng-show="myForm.uname.$error.required">This is a required field</span>
                                 <span ng-show="myForm.uname.$error.minlength">Minimum length required is 3</span>
                                 <span ng-show="myForm.uname.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="firstName">First Name</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.user.firstName" id="firstName" class="firstName form-control input-sm" placeholder="Enter your first name" required ng-minlength="3"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.firstName.$error.required">This is a required field</span>
+                                <span ng-show="myForm.firstName.$error.minlength">Minimum length required is 3</span>
+                                <span ng-show="myForm.firstName.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="lastName">Last Name</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.user.lastName" id="lastName" class="lastName form-control input-sm" placeholder="Enter your Last name" required ng-minlength="3"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.lastName.$error.required">This is a required field</span>
+                                <span ng-show="myForm.lastName.$error.minlength">Minimum length required is 3</span>
+                                <span ng-show="myForm.lastName.$invalid">This field is invalid </span>
                             </div>
                         </div>
                     </div>
@@ -97,6 +125,7 @@
                 <thead>
                 <tr>
                     <th>ID.</th>
+                    <th>User Name</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Email</th>
@@ -107,6 +136,8 @@
                 <tr ng-repeat="u in ctrl.users">
                     <td><span ng-bind="u.id"></span></td>
                     <td><span ng-bind="u.username"></span></td>
+                    <td><span ng-bind="u.firstName"></span> <span ng-bind="u.lastName"></span></td>
+
                     <td><span ng-bind="u.address"></span></td>
                     <td><span ng-bind="u.email"></span></td>
                     <td>
@@ -118,12 +149,35 @@
                 </tr>
                 </tbody>
             </table>
+            <table>
+                <tr>
+                    <td>
+
+
+                        <div
+                                vc-recaptcha
+                                theme="light"
+                                key="'6LdbLBcTAAAAAM87WuYWWU1zrB_UW1IuAw4rnzaG'"
+                                ></div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&amp;render=explicit" async="" defer=""></script>
+
+
+<script src="<c:url value='/res/js/angular/angular.js'/>"></script>
+
+<script src="<c:url value='/res/js/jquery/jquery-1.11.0.min.js' />"></script>
+<script src="<c:url value='/res/js/toaster/toastr.js' />"></script>
+
+<script src="<c:url value='/res/js/noty/jquery.noty.packaged.min.js' />"></script>
+<script src="<c:url value='/res/captcha/angular-recaptcha.min.js/'/>"></script>
 <script src="<c:url value='/res/js/app.js' />"></script>
+
 <script src="<c:url value='/res/js/service/user_service.js' />"></script>
 <script src="<c:url value='/res/js/controller/user_controller.js' />"></script>
 <script>

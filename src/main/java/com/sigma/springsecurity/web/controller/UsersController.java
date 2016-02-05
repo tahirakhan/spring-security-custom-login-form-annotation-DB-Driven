@@ -67,23 +67,51 @@ public class UsersController {
   }
 
 
+  class ReturnData{
 
+    ReturnData(String message){
+      this.message = message;
+
+    }
+    private String message;
+    private HttpStatus code;
+
+
+    public String getMessage() {
+      return message;
+    }
+
+    public void setMessage(String message) {
+      this.message = message;
+    }
+
+    public HttpStatus getCode() {
+      return code;
+    }
+
+    public void setCode(HttpStatus code) {
+      this.code = code;
+    }
+  }
   //-------------------Create a User--------------------------------------------------------
 
   @RequestMapping(value = "/user", method = RequestMethod.POST)
-  public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
+  public ResponseEntity<ReturnData> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
     System.out.println("Creating User " + user.getUsername());
 
     if (userService.isUserExist(user)) {
       System.out.println("A User with name " + user.getUsername() + " already exist");
-      return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+      return new ResponseEntity<ReturnData>(new ReturnData("Test"),HttpStatus.CONFLICT);
     }
-
+    if(user.getFirstName().equalsIgnoreCase("karamat")){
+      System.out.println("A User with First name " + user.getFirstName() + " already exist");
+      return new ResponseEntity<ReturnData>(new ReturnData("Frist Name "+user.getFirstName()+" is Duplicated"),HttpStatus.CONFLICT);
+    }
     userService.saveUser(user);
 
     HttpHeaders headers = new HttpHeaders();
     headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-    return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    return new ResponseEntity<ReturnData>(new ReturnData("Success"),headers, HttpStatus.CREATED);
   }
 
 
